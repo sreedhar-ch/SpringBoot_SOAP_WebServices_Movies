@@ -1,0 +1,63 @@
+1) To get all movie data --> to demo if a value is null that attribute is missing in the response. For movies 101,102,103 the "spaceship" attribute is missing since its null
+
+Request:
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mov:getAllMoviesRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+Response:
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns2:getAllMoviesResponse xmlns:ns2="http://www.javaspringclub.com/movies-ws">
+         <ns2:movieType>
+            <ns2:title>Mama mia</ns2:title>
+            <ns2:category>drama</ns2:category>
+         </ns2:movieType>
+         <ns2:movieType>
+            <ns2:title>Mission Impossible</ns2:title>
+            <ns2:category>action</ns2:category>
+         </ns2:movieType>
+         <ns2:movieType>
+            <ns2:title>Coco</ns2:title>
+            <ns2:category>animation</ns2:category>
+         </ns2:movieType>
+         <ns2:movieType>
+            <ns2:title>Mama mia</ns2:title>
+            <ns2:category>drama</ns2:category>
+            <ns2:spaceship>testing</ns2:spaceship>
+         </ns2:movieType>
+      </ns2:getAllMoviesResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+2) For customizing <detail> value in the response:
+
+Request:
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mov:getMovieByIdRequest>
+         <mov:movieId>1044</mov:movieId>
+      </mov:getMovieByIdRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+Response:
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Server</faultcode>
+         <faultstring xml:lang="en">SOP-330011 Error while executing the method 'GetOfferContentById' of service 'nms:offer'.</faultstring>
+         <detail>
+            <detail>[nms_offer_GetOfferContentById] Offer with offer id = 1675064 doesn't exist.</detail>
+         </detail>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

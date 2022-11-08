@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="bb128a07-eef2-4500-965f-1c5d23a704ab" activeEnvironment="Default" name="movies-soap" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="147196d2-5484-404d-9907-541ac8a5e960" wsaVersion="NONE" name="MoviesPortSoap11" type="wsdl" bindingName="{http://www.javaspringclub.com/movies-ws}MoviesPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ws/movies.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/ws/movies.wsdl"><con:part><con:url>http://localhost:8080/ws/movies.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.javaspringclub.com/movies-ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.javaspringclub.com/movies-ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.javaspringclub.com/movies-ws">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.javaspringclub.com/movies-ws" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getMovieByIdRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="movieId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMovieByIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="movieType" type="tns:movieType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="movieType">
+        <xs:sequence>
+          <xs:element name="movieId" type="xs:long"/>
+          <xs:element name="title" type="xs:string"/>
+          <xs:element name="category" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getAllMoviesRequest">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="getAllMoviesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="movieType" type="tns:movieType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="serviceStatus">
+        <xs:sequence>
+          <xs:element name="statusCode" type="xs:string"/>
+          <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="addMovieRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addMovieResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            <xs:element name="movieType" type="tns:movieType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateMovieRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateMovieResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteMovieRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="movieId" type="xs:long"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteMovieResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="deleteMovieResponse">
+    <wsdl:part element="tns:deleteMovieResponse" name="deleteMovieResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMovieByIdResponse">
+    <wsdl:part element="tns:getMovieByIdResponse" name="getMovieByIdResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMovieResponse">
+    <wsdl:part element="tns:addMovieResponse" name="addMovieResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMoviesRequest">
+    <wsdl:part element="tns:getAllMoviesRequest" name="getAllMoviesRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMovieRequest">
+    <wsdl:part element="tns:addMovieRequest" name="addMovieRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMovieRequest">
+    <wsdl:part element="tns:updateMovieRequest" name="updateMovieRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteMovieRequest">
+    <wsdl:part element="tns:deleteMovieRequest" name="deleteMovieRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMoviesResponse">
+    <wsdl:part element="tns:getAllMoviesResponse" name="getAllMoviesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMovieByIdRequest">
+    <wsdl:part element="tns:getMovieByIdRequest" name="getMovieByIdRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMovieResponse">
+    <wsdl:part element="tns:updateMovieResponse" name="updateMovieResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MoviesPort">
+    <wsdl:operation name="deleteMovie">
+      <wsdl:input message="tns:deleteMovieRequest" name="deleteMovieRequest"></wsdl:input>
+      <wsdl:output message="tns:deleteMovieResponse" name="deleteMovieResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovieById">
+      <wsdl:input message="tns:getMovieByIdRequest" name="getMovieByIdRequest"></wsdl:input>
+      <wsdl:output message="tns:getMovieByIdResponse" name="getMovieByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addMovie">
+      <wsdl:input message="tns:addMovieRequest" name="addMovieRequest"></wsdl:input>
+      <wsdl:output message="tns:addMovieResponse" name="addMovieResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMovies">
+      <wsdl:input message="tns:getAllMoviesRequest" name="getAllMoviesRequest"></wsdl:input>
+      <wsdl:output message="tns:getAllMoviesResponse" name="getAllMoviesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <wsdl:input message="tns:updateMovieRequest" name="updateMovieRequest"></wsdl:input>
+      <wsdl:output message="tns:updateMovieResponse" name="updateMovieResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MoviesPortSoap11" type="tns:MoviesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="deleteMovie">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deleteMovieRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovieById">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getMovieByIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMovieByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addMovie">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addMovieRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMovies">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllMoviesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllMoviesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMovie">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateMovieRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MoviesPortService">
+    <wsdl:port binding="tns:MoviesPortSoap11" name="MoviesPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ws</con:endpoint></con:endpoints><con:operation id="9118e0f2-b11f-42c4-8841-96cf6b81342b" isOneWay="false" action="" name="addMovie" bindingOperationName="addMovie" type="Request-Response" outputName="addMovieResponse" inputName="addMovieRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="66d90708-1b6c-401d-8b1a-78edc9decde7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addMovieRequest>\r
+         <mov:title>?</mov:title>\r
+         <mov:category>?</mov:category>\r
+      </mov:addMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.javaspringclub.com/movies-ws/MoviesPort/addMovieRequest"/></con:call></con:operation><con:operation id="ff270642-93e8-439e-b047-f8f5983b3b88" isOneWay="false" action="" name="deleteMovie" bindingOperationName="deleteMovie" type="Request-Response" outputName="deleteMovieResponse" inputName="deleteMovieRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="478787eb-c8b5-4e53-96e1-73a46ad60f4e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:deleteMovieRequest>\r
+         <mov:movieId>?</mov:movieId>\r
+      </mov:deleteMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.javaspringclub.com/movies-ws/MoviesPort/deleteMovieRequest"/></con:call></con:operation><con:operation id="2df0b006-b84f-4a54-b1b3-70ec41bce2a3" isOneWay="false" action="" name="getAllMovies" bindingOperationName="getAllMovies" type="Request-Response" outputName="getAllMoviesResponse" inputName="getAllMoviesRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="55658e79-413a-4a85-9f6a-d912d3bf2576" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getAllMoviesRequest/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.javaspringclub.com/movies-ws/MoviesPort/getAllMoviesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a079c13b-b8fe-4f34-9fb3-bfbb87bf93b0" isOneWay="false" action="" name="getMovieById" bindingOperationName="getMovieById" type="Request-Response" outputName="getMovieByIdResponse" inputName="getMovieByIdRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4a1d715c-2c83-4b1d-8d18-7576fbedcb8e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getMovieByIdRequest>\r
+         <mov:movieId>104</mov:movieId>\r
+      </mov:getMovieByIdRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.javaspringclub.com/movies-ws/MoviesPort/getMovieByIdRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a6778dcc-1682-436b-9e7c-a75217870afe" isOneWay="false" action="" name="updateMovie" bindingOperationName="updateMovie" type="Request-Response" outputName="updateMovieResponse" inputName="updateMovieRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54de4d6f-6c91-42b5-93f8-b8df075239f0" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.javaspringclub.com/movies-ws">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:updateMovieRequest>\r
+         <mov:title>?</mov:title>\r
+         <mov:category>?</mov:category>\r
+      </mov:updateMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.javaspringclub.com/movies-ws/MoviesPort/updateMovieRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
