@@ -1,0 +1,111 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.javaspringclub.com/movies-ws"
+	targetNamespace="http://www.javaspringclub.com/movies-ws"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   elementFormDefault="qualified">
+
+    <xs:element name="getMovieByIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="movieId" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getMovieByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="movieType" type="tns:movieType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+    <xs:simpleType name="spaceshipType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{0,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:complexType name="movieType">
+		<xs:sequence>
+			<xs:element name="movieId" type="xs:integer" />
+			<xs:element name="title" type="xs:string" />
+			<xs:element name="category" type="xs:string" />
+            <xs:element name="spaceship" type="tns:spaceshipType" />
+		</xs:sequence>
+	</xs:complexType>
+
+ <xs:element name="getAllMoviesRequest">
+        <xs:complexType/>
+    </xs:element>    
+    <xs:element name="getAllMoviesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movieType" type="tns:movieType" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+            <xs:element name="detail" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--<xs:complexType name="detail">
+        <xs:sequence>
+            <xs:any namespace="##any" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any" processContents="lax"/>
+    </xs:complexType>-->
+
+    <xs:element name="addMovieRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+                <xs:element name="category" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addMovieResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="movieType" type="tns:movieType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateMovieRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="title" type="xs:string"/>
+                <xs:element name="category" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateMovieResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteMovieRequest">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="movieId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteMovieResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
