@@ -1,5 +1,6 @@
 package com.javaspringclub.endpoint;
 
+import com.javaspringclub.config.SOAPConnector;
 import com.javaspringclub.entity.MovieEntity;
 import com.javaspringclub.exception.ServiceFaultException;
 import com.javaspringclub.gs_ws.*;
@@ -12,6 +13,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import javax.xml.soap.SOAPException;
+import javax.xml.ws.soap.SOAPFaultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,25 +33,34 @@ public class MovieEndpoint {
         this.service = service;
     }
 
+    @Autowired
+    private SOAPConnector soapConnector;
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMovieByIdRequest")
     @ResponsePayload
     public GetMovieByIdResponse getMovieById(@RequestPayload GetMovieByIdRequest request) throws SOAPException {
         GetMovieByIdResponse response = new GetMovieByIdResponse();
         try {
-            MovieEntity movieEntity = service.getEntityById(request.getMovieId());
+            /*MovieEntity movieEntity = service.getEntityById(request.getMovieId());
             MovieType movieType = new MovieType();
             BeanUtils.copyProperties(movieEntity, movieType);
+            response.setMovieType(movieType);
+            */
 
 			//movieType.setMovieId(movieEntity.getMovieId());
 			/*movieType.setTitle(movieEntity.getTitle());
 			movieType.setCategory(movieEntity.getCategory());
 			movieType.setSpaceship(movieEntity.getSpaceship());
             */
-            response.setMovieType(movieType);
+
+            response = soapConnector.getMovieById("http://localhost:8080/ws",request);
+            //GetMovieByIdResponse responseObj = soapConnector.getBank("/ws",movieEntity);
+            System.out.println(response);
         } catch (Exception ex) {
-            String faultString = "SOP-330011 Error while executing the method 'GetOfferContentById' of service 'nms:offer'.";
+            throw ex;
+            /*String faultString = "SOP-330011 Error while executing the method 'GetOfferContentById' of service 'nms:offer'.";
             String details = "[nms_offer_GetOfferContentById] Offer with offer id = 1675064 doesn't exist.";
-            throw new ServiceFaultException(faultString, details);
+            throw new ServiceFaultException(faultString, details);*/
 
 			/*ServiceStatus ss = new ServiceStatus();
 			ss.setStatusCode("STC");

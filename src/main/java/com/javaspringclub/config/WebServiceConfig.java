@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
@@ -65,5 +66,37 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         exceptionResolver.setExceptionMappings(errorMappings);
         exceptionResolver.setOrder(1);
         return exceptionResolver;
+    }
+
+    @Bean
+    public Jaxb2Marshaller marshaller() {
+
+
+        /*
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        String[] packagesToScan= {"com.javaspringclub.entity","com.javaspringclub.gs_ws"};
+        marshaller.setPackagesToScan(packagesToScan);
+        */
+
+        /*Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPaths("com.javaspringclub.gs_ws","com.javaspringclub.entity");
+        //marshaller.setContextPath("com.javaspringclub.gs_ws");
+        */
+        String[] packagesToScan= {"com.javaspringclub.entity","com.javaspringclub.gs_ws"};
+
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        //marshaller.setPackagesToScan("","");
+        marshaller.setPackagesToScan(packagesToScan);
+        return marshaller;
+    }
+
+    @Bean
+    public SOAPConnector soapConnector(Jaxb2Marshaller marshaller){
+        SOAPConnector soapConnector = new SOAPConnector();
+        soapConnector.setDefaultUri("http://localhost:8080/ws");
+        //soapConnector.setDefaultUri("/ws");
+        soapConnector.setMarshaller(marshaller);
+        soapConnector.setUnmarshaller(marshaller);
+        return soapConnector;
     }
 }
